@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>ws.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ws.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">urllib.request</span>
+<span class="s0">with </span><span class="s1">urllib.request.urlopen(</span><span class="s2">''</span><span class="s1">) </span><span class="s0">as </span><span class="s1">f:</span>
+    <span class="s3"># The response may be compressed (for example, 'gzip').</span>
+    <span class="s1">print(f.headers.get(</span><span class="s2">''</span><span class="s1">))</span>
+    <span class="s1">data = f.read()</span>
+    <span class="s0">if </span><span class="s1">f.headers.get(</span><span class="s2">''</span><span class="s1">) == </span><span class="s2">'gzip'</span><span class="s1">:</span>
+        <span class="s0">import </span><span class="s1">gzip</span>
+        <span class="s1">data = gzip.decompress(data)</span>
+    <span class="s1">print(data[:</span><span class="s4">300</span><span class="s1">].decode(</span><span class="s2">'utf-8'</span><span class="s0">, </span><span class="s1">errors=</span><span class="s2">'replace'</span><span class="s1">))</span></pre>
+</body>
+</html>
