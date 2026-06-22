@@ -1,0 +1,18 @@
+import urllib.request
+import gzip
+import io
+
+url = 'https://example.com'  # set a real URL
+req = urllib.request.Request(url, headers={'Accept-Encoding': 'gzip, deflate'})
+with urllib.request.urlopen(req, timeout=10) as f:
+    # check the Content-Encoding header
+    encoding = f.headers.get('Content-Encoding', '')
+    data = f.read()
+    if 'gzip' in encoding:
+        data = gzip.decompress(data)
+    # detect charset from Content-Type, default to utf-8
+    content_type = f.headers.get('Content-Type', '')
+    charset = 'utf-8'
+    if 'charset=' in content_type:
+        charset = content_type.split('charset=')[-1].split(';')[0].strip()
+    print(data[:300].decode(charset, errors='replace'))
